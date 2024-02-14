@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Chatbot</title>
+    <style>
+        body, textarea, pre {
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            display: flex;
+            justify-content: space-between;
+        }
+        #chat, #questionnaire {
+            width: calc(50% - 10px);
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: none;
+        }
+        pre {
+            white-space: pre-wrap;    /* CSS3 */
+            word-wrap: break-word;    /* IE 5.5-7 */
+            overflow-wrap: break-word; /* Modern browsers */
+        }
+        #questionnaire {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').keydown(function(event) {
+                if (event.keyCode == 13 && !event.shiftKey) {
+                    event.preventDefault();
+                    $(this).closest('form').submit();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+    <div id="chat">
+        <form method="post">
+            <textarea name="user_input" placeholder="Type your message..."></textarea>
+            <input type="submit" value="Send">
+        </form>
+        <p>User:</p>
+        {{ user_input }}
+        <p>Bot:</p>
+        {% for line in bot_response_lines %}
+        <pre>{{ line }}</pre>
+        {% endfor %}
+    </div>
+    <div id="questionnaire">
+        <h2>Questionnaire</h2>
+        <pre>{{ questionnaire }}</pre>
+    </div>
+</div>
+</body>
+</html>

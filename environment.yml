@@ -1,0 +1,12 @@
+name: ai_agency
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - openai
+  - flask
+  - pip:
+    - langchain
+    - langchain_openai
+    - langchain_core
+    - python-dotenv
